@@ -35,23 +35,23 @@ func main8() {
 
 }
 
-func readOnly(ch <-chan int, wg sync.WaitGroup) {
-	defer wg.Done()
+// func readOnly(ch <-chan int, wg sync.WaitGroup) {
+// 	defer wg.Done()
 
-	// 通道关闭后自动退出
-	for v := range ch {
-		fmt.Println("read， ", v)
-	}
+// 	// 通道关闭后自动退出
+// 	for v := range ch {
+// 		fmt.Println("read， ", v)
+// 	}
 
-}
+// }
 
-func sendOnly(ch chan<- int, wg sync.WaitGroup) {
-	defer wg.Done()
-	for i := 1; i < 100; i++ {
-		ch <- i
-		fmt.Println("send， ", i)
-	}
-	close(ch) // 发送完关闭，通知消费者退出
-}
+// func sendOnly(ch chan<- int, wg sync.WaitGroup) {
+// 	defer wg.Done()
+// 	for i := 1; i < 100; i++ {
+// 		ch <- i
+// 		fmt.Println("send， ", i)
+// 	}
+// 	close(ch) // 发送完关闭，通知消费者退出
+// }
 
 // Q： 缓冲机制需要和  sync.WaitGroup  搭配一起使用；否则当缓冲队列填满的时候会发生阻塞，进而发生死锁

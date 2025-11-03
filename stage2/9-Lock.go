@@ -6,28 +6,28 @@ import (
 	"time"
 )
 
-// TaskStat 保存单个任务的统计信息
-type TaskStat struct {
+// TaskStat9 保存单个任务的统计信息
+type TaskStat9 struct {
 	ID   int
 	Name string
 	Cost time.Duration
 }
 
-// Scheduler 任务调度器
-type Scheduler struct {
-	stats []TaskStat     // 统计结果
+// Scheduler9 任务调度器
+type Scheduler9 struct {
+	stats []TaskStat9    // 统计结果
 	mu    sync.Mutex     // 保护 stats
 	wg    sync.WaitGroup // 等待所有任务完成
 }
 
-// NewScheduler 构造器
-func NewScheduler() *Scheduler {
-	return &Scheduler{stats: make([]TaskStat, 0)}
+// NewScheduler9 构造器
+func NewScheduler9() *Scheduler9 {
+	return &Scheduler9{stats: make([]TaskStat9, 0)}
 }
 
 // Submit 提交一个任务
 // id 与 name 仅用于标识，方便查看结果
-func (s *Scheduler) Submit(id int, name string, task func()) {
+func (s *Scheduler9) Submit(id int, name string, task func()) {
 	s.wg.Add(1)
 	go func() {
 		defer s.wg.Done()
@@ -40,13 +40,13 @@ func (s *Scheduler) Submit(id int, name string, task func()) {
 
 		// 线程安全地记录结果
 		// s.mu.Lock()
-		// s.stats = append(s.stats, TaskStat{ID: id, Name: name, Cost: cost})
+		// s.stats = append(s.stats, TaskStat9{ID: id, Name: name, Cost: cost})
 		// s.mu.Unlock()
 	}()
 }
 
 // Wait 等待所有任务完成，并返回统计结果
-func (s *Scheduler) Wait() []TaskStat {
+func (s *Scheduler9) Wait() []TaskStat9 {
 	s.wg.Wait()
 	return s.stats
 }
@@ -69,7 +69,7 @@ func main9() {
 		func() { increment(&index) },
 	}
 
-	sched := NewScheduler()
+	sched := NewScheduler9()
 
 	// 提交任务
 	for i, t := range tasks {

@@ -2,16 +2,16 @@ package main
 
 import "fmt"
 
-type PayMethod interface {
+type PayMethod02 interface {
 	Pay(int)
 }
 
-type CreditCard struct {
+type CreditCard02 struct {
 	balance int
 	limit   int
 }
 
-func (c *CreditCard) Pay(amout int) {
+func (c *CreditCard02) Pay(amout int) {
 	if c.balance < amout {
 		fmt.Println("余额不足")
 		return
@@ -25,9 +25,9 @@ func anyParam(param interface{}) {
 }
 
 func main02() {
-	c := CreditCard{balance: 100, limit: 1000}
+	c := CreditCard02{balance: 100, limit: 1000}
 	c.Pay(200)
-	var a PayMethod = &c
+	var a PayMethod02 = &c
 	fmt.Println("a.Pay: ", a)
 
 	var b interface{} = &c

@@ -58,16 +58,16 @@ func main10() {
 
 	// 构造 5 个模拟任务
 	tasks := []func(){
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
-		func() { increment(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
+		func() { increment9(&index) },
 	}
 
 	sched := NewScheduler()
@@ -84,7 +84,7 @@ func main10() {
 	fmt.Println("共享变量： ", index)
 }
 
-func increment(index *int64) {
+func increment9(index *int64) {
 	for i := 0; i < 1000; i++ {
 		// (*index)++
 		atomic.AddInt64(index, 1)

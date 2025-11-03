@@ -73,7 +73,7 @@ func main03() {
 	fmt.Println("\n再次使用借记卡购买:")
 	purchaseItem(debitCard, 300)
 
-	var a PayMethod = creditCard
+	// var a PayMethod = creditCard
 
 }
 
