@@ -5,7 +5,7 @@ import (
 	"sync"
 )
 
-func main() {
+func main8() {
 	// version1  // 创建一个带缓冲的channel
 
 	var wg sync.WaitGroup

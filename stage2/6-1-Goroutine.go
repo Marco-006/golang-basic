@@ -49,7 +49,7 @@ func (s *Scheduler) Wait() []TaskStat {
 	return s.stats
 }
 
-func main() {
+func main6() {
 	// 构造 5 个模拟任务
 	tasks := []func(){
 		func() { time.Sleep(100 * time.Millisecond) },

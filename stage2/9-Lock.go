@@ -51,7 +51,7 @@ func (s *Scheduler) Wait() []TaskStat {
 	return s.stats
 }
 
-func main() {
+func main9() {
 	//共享计数器
 	index := 0
 

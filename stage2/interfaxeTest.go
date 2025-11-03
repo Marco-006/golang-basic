@@ -60,7 +60,7 @@ func purchaseItem(p PayMethod, price int) {
 	}
 }
 
-func main01() {
+func main03() {
 	creditCard := &CreditCard{balance: 0, limit: 1000}
 	debitCard := &DebitCard{balance: 500}
 

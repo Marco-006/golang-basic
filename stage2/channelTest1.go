@@ -21,7 +21,7 @@ func sendOnly(ch chan<- int) {
 	close(ch)
 }
 
-func main() {
+func main01() {
 	// 创建一个带缓冲的channel
 	ch := make(chan int, 3)
 
