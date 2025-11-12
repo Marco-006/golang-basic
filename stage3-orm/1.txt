@@ -1,0 +1,112 @@
+package task6gormadvance
+
+import (
+	"fmt"
+
+	"gorm.io/gorm"
+)
+
+// 基于上述博客系统的模型定义。
+// 要求 ：
+// 编写Go代码，使用Gorm查询某个用户发布的所有文章及其对应的评论信息。
+// 编写Go代码，使用Gorm查询评论数量最多的文章信息。
+
+type User struct {
+	gorm.Model
+	Post []Post
+}
+
+type Post struct {
+	gorm.Model
+	UserID  uint
+	Comment []Comment
+}
+
+type Comment struct {
+	gorm.Model
+	PostID uint
+	Cotent string
+}
+
+func Run(db *gorm.DB) {
+	// init table structure
+	// db.AutoMigrate(&User{})
+	// db.AutoMigrate(&Post{})
+	// db.AutoMigrate(&Comment{})
+	var userID = 2
+	// user := User{ID: 2}
+	// db.Debug().Table("User").Where("id = ?", userID).Find(&user)
+	// gorm.G[User](db).First(2)
+	var user User
+	db.Preload("Post.Comment").First(&user, userID)
+	fmt.Println("user 表", user)
+
+	//关联不上
+	for _, post := range user.Post {
+		fmt.Println("用户发表的文章:", post)
+		for _, comment := range post.Comment {
+			fmt.Println("文章对应的评论:", comment)
+		}
+	}
+
+	// fmt.Println("用户 发表的所有文章： ", posts)
+
+	// for _, v := range posts {
+
+	// }
+
+	// db.Model("Comment").Where()
+
+	// 关联删除
+
+}
+
+
+
+	var employees []Employee
+	db.Select(&employees, "select * from employees where department = ?", "B")
+	fmt.Println("所有部门为技术部的员工信息: ", employees)
+
+
+	var employees []Employee
+	db.Select(&employees, "select * from employees where department = ?", 'B')
+	fmt.Println("所有部门为技术部的员工信息: ", employees)
+
+
+
+	type Employee struct {
+	// 测试GORM是不是可用
+	gorm.Model
+	Name       string
+	Department string
+	Salary     int64
+}
+
+func Run(dbGorm *gorm.DB) {
+	// dbGorm.AutoMigrate(&Employee{})
+
+	// dbGorm.Create(&Employee{Name: "a1", Department: "A", Salary: 23})
+	// dbGorm.Create(&Employee{Name: "a2", Department: "A", Salary: 34})
+	// dbGorm.Create(&Employee{Name: "b1", Department: "B", Salary: 78})
+	// dbGorm.Create(&Employee{Name: "b2", Department: "B", Salary: 89})
+	// dbGorm.Create(&Employee{Name: "c1", Department: "C", Salary: 66})
+	// dbGorm.Create(&Employee{Name: "c2", Department: "C", Salary: 55})
+
+	db, err := sqlx.Open("mysql", "root:st123456@tcp(127.0.0.1:3306)/web3_learnning")
+
+	if err != nil {
+		fmt.Println("数据库连接创建失败:", err)
+	}
+
+	if err := db.Ping(); err != nil {
+		fmt.Println("数据库连接失败（Ping 阶段）:", err)
+	}
+
+	var employees []Employee
+	db.Select(&employees, "select * from employees where department = ?", "B")
+	fmt.Println("所有部门为技术部的员工信息: ", employees)
+
+	var e Employee
+	db.Select(&e, "SELECT * from employees order by salary desc limit 1")
+	fmt.Println("工资最高的员工ID为: ", e.ID)
+}

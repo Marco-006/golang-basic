@@ -1,0 +1,43 @@
+package task5gormadvance
+
+import (
+	"gorm.io/gorm"
+)
+
+// 基于上述博客系统的模型定义。
+// 要求 ：
+// 编写Go代码，使用Gorm查询某个用户发布的所有文章及其对应的评论信息。
+// 编写Go代码，使用Gorm查询评论数量最多的文章信息。
+
+type User1 struct {
+	gorm.Model
+	Post []Post
+}
+
+type Post1 struct {
+	gorm.Model
+	UserID  uint
+	Comment []Comment
+}
+
+type Comment1 struct {
+	gorm.Model
+	PostID uint
+	Cotent string
+}
+
+func Run1(db *gorm.DB) {
+	// init table structure
+	// db.AutoMigrate(&User{})
+	// db.AutoMigrate(&Post{})
+	// db.AutoMigrate(&Comment{})
+	// var userID = 2
+	// var posts Post1
+	// db.Model("Post1").Where("UserID = ?", userID).Find(&posts)
+	// fmt.Println("用户 发表的所有文章： ", posts)
+
+	// db.Model("Comment1").Where()
+
+	// 关联删除
+
+}
